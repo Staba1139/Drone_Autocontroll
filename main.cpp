@@ -22,6 +22,10 @@ int main(){
     serial.printf("begin DroneControll\r\n");
 
     while(1){
+
+        /*
+        ------------------Read Section------------------------------------------------
+        */
         sensor.readAll();
         ax = sensor.ax;
         ay = sensor.ay;
