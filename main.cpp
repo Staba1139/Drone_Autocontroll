@@ -4,7 +4,7 @@
 #include "PID/PIDcontroller.h"
 
 
-LSM6DS33 sensor(p9, P10, LSM6DS33_AG_I2C_ADDR(1));
+LSM6DS33 sensor(p9, p10, LSM6DS33_AG_I2C_ADDR(1));
 
 Timer tmain;
 
