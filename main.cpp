@@ -29,6 +29,7 @@ int main(){
 
     while(1){
 
+<<<<<<< HEAD
         /* 
         ----------Read Section-------------------
         */
@@ -39,6 +40,19 @@ int main(){
         
 
 
+=======
+        /*
+        ------------------Read Section------------------------------------------------
+        */
+        sensor.readAll();
+        ax = sensor.ax;
+        ay = sensor.ay;
+        az = sensor.az;
+        gx = sensor.gx;
+        gy = sensor.gy;
+        gz = sensor.gz;
+        serial.printf("IMU: ax:%f, ay:%f, az:%f, gx:%f, gy:%f, gz:%f", ax, ay, az, gx, gy, gz);
+>>>>>>> 29ae94bb2bec381bb2c1722025e028d245be4cd2
     } 
 
 }
