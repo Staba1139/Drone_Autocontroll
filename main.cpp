@@ -5,10 +5,16 @@
 
 
 LSM6DS33 sensor(p9, p10, LSM6DS33_AG_I2C_ADDR(1));
+Madgwick comAng();
+
 
 Timer tmain;
 
 float ax, ay, az, gx, gy, gz;   //Sensor value
+float mx = 0.0, my = 0.0, mz = 0.0; //Invalid Sensor value
+float roll, pitch, yaw;
+
+void readsensor();
 
 int main(){
     sensor.begin();
@@ -22,17 +28,31 @@ int main(){
     serial.printf("begin DroneControll\r\n");
 
     while(1){
-        sensor.readAll();
-        ax = sensor.ax;
-        ay = sensor.ay;
-        az = sensor.az;
-        gx = sensor.gx;
-        gy = sensor.gy;
-        gz = sensor.gz;
-        serial.printf("IMU: ax:%f, ay:%f, az:%f, gx:%f, gy:%f, gz:%f", ax, ay, az, gx, gy, gz);
+
+        /* 
+        ----------Read Section-------------------
+        */
+        readsensor();
+
+        /*--------Compute Angle------------------
+        */
         
+
+
     } 
 
 }
 
+
+void readsensor(){
+    sensor.readAll();
+    ax = sensor.ax;
+    ay = sensor.ay;
+    az = sensor.az;
+    gx = sensor.gx;
+    gy = sensor.gy;
+    gz = sensor.gz;
+
+    return 0;
+}
 
