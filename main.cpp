@@ -2,11 +2,14 @@
 #include "LSM6DS33/LSM6DS33.h"
 #include "MadgwickAHRS/MadgwickAHRS.h"
 #include "PID/PIDcontroller.h"
+#include "USBSerial.h"
+
+#define Freq 5000.0f
 
 
 LSM6DS33 sensor(p9, p10, LSM6DS33_AG_I2C_ADDR(1));
-Madgwick comAng();
-
+Madgwick comAng;
+USBSerial serial;
 
 Timer tmain;
 
@@ -27,9 +30,10 @@ int main(){
 
     serial.printf("begin DroneControll\r\n");
 
+    float periodTime = 1.0f / Freq;
+
     while(1){
 
-<<<<<<< HEAD
         /* 
         ----------Read Section-------------------
         */
@@ -37,22 +41,17 @@ int main(){
 
         /*--------Compute Angle------------------
         */
-        
+        comAng.begin(periodTime);
+        comAng.update(gx, gy, gz, ax, ay, az, mx, my, mz);
+        roll = comAng.getRoll();
+        pitch = comAng.getPitch();
+        yaw = comAng.getYaw();
+
+        serial.printf("roll = %f, pitch = %f, yaw = %f", roll, pitch, yaw);
+        wait(0.05);
 
 
-=======
-        /*
-        ------------------Read Section------------------------------------------------
-        */
-        sensor.readAll();
-        ax = sensor.ax;
-        ay = sensor.ay;
-        az = sensor.az;
-        gx = sensor.gx;
-        gy = sensor.gy;
-        gz = sensor.gz;
-        serial.printf("IMU: ax:%f, ay:%f, az:%f, gx:%f, gy:%f, gz:%f", ax, ay, az, gx, gy, gz);
->>>>>>> 29ae94bb2bec381bb2c1722025e028d245be4cd2
+
     } 
 
 }
