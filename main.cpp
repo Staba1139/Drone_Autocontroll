@@ -30,7 +30,6 @@ int main(){
 
     serial.printf("begin DroneControll\r\n");
 
-    float periodTime = 1.0f / Freq;
 
     while(1){
 
@@ -41,7 +40,7 @@ int main(){
 
         /*--------Compute Angle------------------
         */
-        comAng.begin(periodTime);
+        comAng.begin(Freq);
         comAng.update(gx, gy, gz, ax, ay, az, mx, my, mz);
         roll = comAng.getRoll();
         pitch = comAng.getPitch();
